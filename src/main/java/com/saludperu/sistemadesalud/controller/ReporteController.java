@@ -12,10 +12,10 @@ public class ReporteController {
     @Autowired
     private ReporteService reporteService;
 
-    @GetMapping("/reportes")
+    @GetMapping("/reporte")
     public String verReportes(Model model) {
         // Obtiene el resumen general en formato Map para las tarjetas del dashboard
         model.addAttribute("resumen", reporteService.obtenerResumenGeneralReportes());
-        return "reportes"; // Hace referencia a reportes.html en templates
+        return "reporte"; // Hace referencia a reportes.html en templates
     }
 }

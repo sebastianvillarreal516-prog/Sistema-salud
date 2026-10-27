@@ -3,6 +3,7 @@ package com.saludperu.sistemadesalud.dao.impl;
 import com.saludperu.sistemadesalud.dao.VigilanciaDao;
 import com.saludperu.sistemadesalud.model.Dengue;
 import com.saludperu.sistemadesalud.model.CasoCovid;
+import com.saludperu.sistemadesalud.model.VigilanciaMalaria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,5 +29,11 @@ public class VigilanciaDaoImpl implements VigilanciaDao {
         // Llamada limpia al stored procedure de COVID
         String sql = "EXEC sp_ListarCasosCovidPorDepto ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CasoCovid.class), departamento);
+    }
+
+    @Override
+    public List<VigilanciaMalaria> listarMalariaPorDeptoYAnio(String departamento, int anio) {
+        String sql = "EXEC sp_ObtenerTotalMalariaPorAnio ?, ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(VigilanciaMalaria.class), departamento, anio);
     }
 }
